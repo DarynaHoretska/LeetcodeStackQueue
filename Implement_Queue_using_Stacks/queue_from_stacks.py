@@ -27,13 +27,15 @@ class MyQueue:
         self.stack1.push(x)
 
     def pop(self) -> int:
-        while not self.stack1.is_empty():
-            self.stack2.push(self.stack1.pop())
+        if self.stack2.is_empty():
+            while not self.stack1.is_empty():
+                self.stack2.push(self.stack1.pop())
         return self.stack2.pop()
 
     def peek(self) -> int:
-        while not self.stack1.is_empty():
-            self.stack2.push(self.stack1.pop())
+        if self.stack2.is_empty():
+            while not self.stack1.is_empty():
+                self.stack2.push(self.stack1.pop())
         return self.stack2.peek()
 
     def empty(self) -> bool:
