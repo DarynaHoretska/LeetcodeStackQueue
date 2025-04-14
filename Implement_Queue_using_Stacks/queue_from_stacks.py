@@ -29,12 +29,17 @@ class MyStack:
     def pop(self) -> int:
         while self.queue1.size() > 1:
             self.queue2.push(self.queue1.pop())
-        return self.queue1.pop()
+        el = self.queue1.pop()
+        self.queue1, self.queue2 = self.queue2, self.queue1
+        return el
 
     def top(self) -> int:
         while self.queue1.size() > 1:
             self.queue2.push(self.queue1.pop())
-        return self.queue2.peek()
+        el = self.queue1.pop()
+        self.queue2.push(el)
+        self.queue1, self.queue2 = self.queue2, self.queue1
+        return el
 
     def empty(self) -> bool:
         return self.queue1.is_empty() and self.queue2.is_empty()
