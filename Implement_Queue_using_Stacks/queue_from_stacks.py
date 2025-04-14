@@ -1,15 +1,15 @@
-class Stack:
+class Queue:
     def __init__(self):
         self.elem = []
 
     def pop(self):
-        return self.elem.pop()
+        return self.elem.pop(0)
 
     def push(self, value):
         self.elem.append(value)
 
     def peek(self):
-        return self.elem[-1]
+        return self.elem[0]
 
     def size(self):
         return len(self.elem)
@@ -17,34 +17,32 @@ class Stack:
     def is_empty(self):
         return len(self.elem) == 0
 
-class MyQueue:
+class MyStack:
 
     def __init__(self):
-        self.stack1 = Stack()
-        self.stack2 = Stack()
+        self.queue1 = Queue()
+        self.queue2 = Queue()
 
     def push(self, x: int) -> None:
-        self.stack1.push(x)
+        self.queue1.push(x)
 
     def pop(self) -> int:
-        if self.stack2.is_empty():
-            while not self.stack1.is_empty():
-                self.stack2.push(self.stack1.pop())
-        return self.stack2.pop()
+        while self.queue1.size() > 1:
+            self.queue2.push(self.queue1.pop())
+        return self.queue1.pop()
 
-    def peek(self) -> int:
-        if self.stack2.is_empty():
-            while not self.stack1.is_empty():
-                self.stack2.push(self.stack1.pop())
-        return self.stack2.peek()
+    def top(self) -> int:
+        while self.queue1.size() > 1:
+            self.queue2.push(self.queue1.pop())
+        return self.queue2.peek()
 
     def empty(self) -> bool:
-        return self.stack1.is_empty() and self.stack2.is_empty()
+        return self.queue1.is_empty() and self.queue2.is_empty()
 
 
-# Your MyQueue object will be instantiated and called as such:
-# obj = MyQueue()
+# Your Myqueue object will be instantiated and called as such:
+# obj = Myqueue()
 # obj.push(x)
 # param_2 = obj.pop()
-# param_3 = obj.peek()
+# param_3 = obj.top()
 # param_4 = obj.empty()

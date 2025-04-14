@@ -20,23 +20,30 @@ class Queue:
 class MyStack:
 
     def __init__(self):
-        
+        self.queue1 = Queue()
+        self.queue2 = Queue()
 
     def push(self, x: int) -> None:
-        
+        self.queue1.push(x)
 
     def pop(self) -> int:
-        
+        if self.queue2.is_empty():
+            while not self.queue1.is_empty():
+                self.queue2.push(self.queue1.pop())
+        return self.queue2.pop()
 
     def top(self) -> int:
-        
+        if self.queue2.is_empty():
+            while not self.queue1.is_empty():
+                self.queue2.push(self.queue1.pop())
+        return self.queue2.peek()
 
     def empty(self) -> bool:
-        
+        return self.queue1.is_empty() and self.queue2.is_empty()
 
 
-# Your MyStack object will be instantiated and called as such:
-# obj = MyStack()
+# Your Myqueue object will be instantiated and called as such:
+# obj = Myqueue()
 # obj.push(x)
 # param_2 = obj.pop()
 # param_3 = obj.top()
